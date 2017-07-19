@@ -2,24 +2,21 @@
 
 {% block content %}
 
-
 {% if blog_id %}
-<h1>{{blog_title}}</h1>
-<p>{{blog_body}}</p>
-
-{% else %}
-<h1>Build a Blog</h1>
-{% for blog in blogs %}
-
-<h3><a href="/blog?id={{blog.id}}&title={{blog.title}}&body={{blog.body}}">{{blog.title}}</a></h3>
+<h1>{{blog.title}}</h1>
 <p>{{blog.body}}</p>
+{% else %}
 
+<h1>Build a Blog</h1>
 
-<hr>
+{% for blog in blogs|sort(attribute='date', reverse = True) %}
 
-<br>
+<h2><a href="/blog?id={{blog.id}}">{{blog.title}}</a></h2>
+<p>{{blog.body}}</p>
 
 {% endfor %}
 
+
 {% endif %}
+
 {% endblock %}
