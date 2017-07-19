@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+{% if blog_id %}
+<h1>{{blog_title}}</h1>
+<p>{{blog_body}}</p>
+
+{% else %}
+<h1>Build a Blog</h1>
+{% for blog in blogs %}
+
+<h3><a href="/blog?id={{blog.id}}&title={{blog.title}}&body={{blog.body}}">{{blog.title}}</a></h3>
+<p>{{blog.body}}</p>
+
+
+<hr>
+
+<br>
+
+{% endfor %}
+
+{% endif %}
+{% endblock %}

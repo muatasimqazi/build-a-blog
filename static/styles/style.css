@@ -1,0 +1,10 @@
+h1 {
+  text-align: center;
+}
+nav a {
+  padding-right: 20px;
+}
+
+.error {
+  color: red;
+}
