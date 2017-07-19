@@ -1,22 +1,35 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {% block content %}
+<article>
+  {% if blog_id %}
+  <header>
+    <h2>{{blog.title}}</h2>
+    <small><b class="date">Published on:</b> {{blog.date.strftime('%B %d, %Y')}}</small>
+    <hr>
+  </header>
+  <p>{{blog.body}}</p>
 
-{% block content %}
+  {% else %} {% for blog in blogs|sort(attribute='date', reverse = True) %}
+  <header>
+    <h2><a href="/blog?id={{blog.id}}">{{blog.title}}</a></h2>
+  </header>
+  <p>{{blog.body}}</p>
 
-{% if blog_id %}
-<h1>{{blog.title}}</h1>
-<p>{{blog.body}}</p>
-{% else %}
+  <footer>
+    <small><b class="date">Published on:</b> {{blog.date.strftime('%B %d, %Y')}}</small>
+      <hr>
+  </footer>
 
-<h1>Build a Blog</h1>
+  {% endfor %} {% endif %}
+</article>
+<!--
+<aside>
+  <h3>aside</h3>
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sodales urna non odio egestas tempor. Nunc vel vehicula ante. Etiam bibendum iaculis libero, eget molestie nisl pharetra in. In semper consequat est, eu porta velit mollis nec. Curabitur
+    posuere enim eget turpis feugiat tempor. Etiam ullamcorper lorem dapibus velit suscipit ultrices.</p>
+</aside> -->
 
-{% for blog in blogs|sort(attribute='date', reverse = True) %}
-
-<h2><a href="/blog?id={{blog.id}}">{{blog.title}}</a></h2>
-<p>{{blog.body}}</p>
-
-{% endfor %}
 
 
-{% endif %}
+
 
 {% endblock %}

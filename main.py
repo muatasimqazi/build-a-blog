@@ -2,7 +2,6 @@ from flask import Flask, request, redirect, render_template
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
-
 app = Flask(__name__, static_url_path='/static')
 
 app.config['DEBUG'] = True
@@ -52,7 +51,7 @@ def create_newpost():
                 blog_id = blog_post.id;
                 return redirect("/blog?id=" + str(blog_id))
 
-    return render_template('new-post.html', error_title=error_title, error_body=error_body)
+    return render_template('new-post.html', error_title=error_title, error_body=error_body, title="New Blog Post")
 
 @app.route('/blog', methods=['GET', 'POST'])
 def display_posts():
@@ -61,11 +60,11 @@ def display_posts():
     if  blog_id:
 
         blog_post = Blog.query.filter_by(id=blog_id).first()
-        return render_template('blog.html', blog=blog_post, blog_id=blog_id)
+        return render_template('blog.html', blog=blog_post, blog_id=blog_id, title="Build a Blog")
 
     else:
         blog_posts = Blog.query.all()
-        return render_template('blog.html', blogs=blog_posts)
+        return render_template('blog.html', blogs=blog_posts, title="Build a Blog")
 
 @app.route('/')
 def index():
